@@ -44,7 +44,6 @@ class Management:
         self.clear_bt = Button(self.frame_2, text='Clear', font=(self.font_1, 12), bd=2, command=self.clear_screen, cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=68,y=280,width=100)
         self.exit_bt = Button(self.frame_2, text='Exit', font=(self.font_1, 12), bd=2, command=self.Exit, cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=68,y=340,width=100)
 
-
     def show_all(self):
         self.clear_screen()
 
@@ -95,7 +94,6 @@ class Management:
         connection.commit()
         connection.close()
 
-
     # Widgets for adding fast food information
     def add_food(self):
         self.clear_screen()
@@ -121,23 +119,22 @@ class Management:
         self.Carbs_entry.place(x=50,y=305, width=200, height=30)
 
         self.Protein = Label(self.frame_1, text="Protein", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=300,y=270)
-        self.Protein = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
-        self.Protein.place(x=310,y=305, width=200, height=30)
+        self.Protein_entry = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
+        self.Protein_entry.place(x=310,y=305, width=200, height=30)
 
         self.Fat = Label(self.frame_1, text="Fat", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=560,y=270)
-        self.Fat = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
-        self.Fat.place(x=570,y=305, width=200, height=30)
+        self.Fat_entry = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
+        self.Fat_entry.place(x=570,y=305, width=200, height=30)
 
         self.Calo = Label(self.frame_1, text="Calo", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=820,y=270)
         self.Calo_entry = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
         self.Calo_entry.place(x=830,y=305, width=200, height=30)
 
         self.dataSource = Label(self.frame_1, text="Data Source", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=40,y=390)
-        self.dataSource = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
-        self.dataSource.place(x=50,y=425, width=980, height=30)
+        self.dataSource_entry = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
+        self.dataSource_entry.place(x=50,y=425, width=980, height=30)
 
         self.submit_bt_1 = Button(self.frame_1, text='Submit', font=(self.font_1, 15), bd=2, command=self.submit, cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=490,y=550,width=100)
-
 
     # Show a fast food information
     def get_info_view(self):
@@ -218,20 +215,20 @@ class Management:
         self.Carbs_entry.place(x=50,y=185, width=200, height=30)
 
         self.Protein = Label(self.frame_1, text="Protein", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=300,y=150)
-        self.Protein = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
-        self.Protein.place(x=310,y=185, width=200, height=30)
+        self.Protein_entry = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
+        self.Protein_entry.place(x=310,y=185, width=200, height=30)
 
         self.Fat = Label(self.frame_1, text="Fat", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=560,y=150)
-        self.Fat = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
-        self.Fat.place(x=570,y=185, width=200, height=30)
+        self.Fat_entry = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
+        self.Fat_entry.place(x=570,y=185, width=200, height=30)
 
         self.Calo = Label(self.frame_1, text="Calo", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=820,y=150)
         self.Calo_entry = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
         self.Calo_entry.place(x=830,y=185, width=200, height=30)
 
         self.dataSource = Label(self.frame_1, text="Data Source", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=40,y=270)
-        self.dataSource = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
-        self.dataSource.place(x=50,y=305, width=980, height=30)
+        self.dataSource_entry = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
+        self.dataSource_entry.place(x=50,y=305, width=980, height=30)
 
         self.submit_bt_1 = Button(self.frame_1, text='Submit', font=(self.font_1, 15), bd=2, command=partial(self.update_info, row), cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=160,y=425,width=100)
         self.cancel_bt = Button(self.frame_1, text='Cancel', font=(self.font_1, 15), bd=2, command=self.clear_screen, cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=280,y=425,width=100)
@@ -268,7 +265,7 @@ class Management:
 
     # Updates fast food information
     def update_info(self, row):
-        if self.getName_entry.get() == '':
+        if self.Carbs_entry.get() == '' or self.Protein_entry.get() == '' or self.Fat_entry.get() == '' or self.Calo_entry.get() == '' or self.dataSource_entry.get() == '':
             messagebox.showerror("Error!", "All fields are required",parent=self.window)
         else:
             try:
@@ -280,7 +277,7 @@ class Management:
                 if row==None:
                     messagebox.showerror("Error!","The food doesn't exists",parent=self.window)
                 else:
-                    curs.execute("update fast_food set Carbs=%s, Protein=%s, Fat=%s, Calo=%s, Data Source=%s where Brand=%s, Type=%s, Name=%s",
+                    curs.execute("update fast_food set Carbs=%s, Protein=%s, Fat=%s, Calo=%s, Data Source=%s where Name=%s",
                                         (
                                             self.Carbs_entry.get(),
                                             self.Protein_entry.get(),
@@ -298,13 +295,13 @@ class Management:
     
     # Add the information of new food information
     def submit(self):
-        if self.getName_entry.get() == '':
+        if self.No_entry.get() == '' or self.Brand_entry.get() == '' or self.Type_entry.get() == '' or self.Name_entry.get() == '' or self.Carbs_entry.get() == '' or self.Protein_entry.get() == '' or self.Fat_entry.get() == '' or self.Calo_entry.get() == '' or self.dataSource_entry.get() == '':
             messagebox.showerror("Error!","Sorry!, All fields are required",parent=self.window)
         else:
             try:
                 connection = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database)
                 curs = connection.cursor()
-                curs.execute("select * from fast_food where Name=%s", self.getName_entry.get())
+                curs.execute("select * from fast_food where Name=%s", self.Name_entry.get())
                 row=curs.fetchone()
 
                 if row!=None:
