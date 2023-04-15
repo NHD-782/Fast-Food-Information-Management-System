@@ -10,7 +10,7 @@ import credentials as cr
 class Management:
     def __init__(self, root):
         self.window = root
-        self.window.title("Fast Food Information Management System (KFC & BURGER KING)")
+        self.window.title("FAST FOOD INFORMATION MANAGEMENT SYSTEM")
         self.window.geometry("1350x750+0+0")
         self.window.config(bg="white")
 
@@ -44,6 +44,7 @@ class Management:
         self.clear_bt = Button(self.frame_2, text='Clear', font=(self.font_1, 12), bd=2, command=self.clear_screen, cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=68,y=280,width=100)
         self.exit_bt = Button(self.frame_2, text='Exit', font=(self.font_1, 12), bd=2, command=self.Exit, cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=68,y=340,width=100)
 
+
     def show_all(self):
         self.clear_screen()
 
@@ -57,10 +58,10 @@ class Management:
         self.treeScroll.config(command=self.tree.yview)
 
         # Define columns and headings
-        self.tree['columns'] = ("No.", "Brand", "Type", "Name", "Carbs", "Protein", "Fat", "Calo", "Data Source")
+        self.tree['columns'] = ("No", "Brand", "Type", "Name", "Carbs", "Protein", "Fat", "Calo", "Data Source")
 
-        self.tree.column("#0",width=0,stretch=0)
-        self.tree.column("No.", width=40)
+        self.tree.column("#0", width=0, stretch=0)
+        self.tree.column("No", width=40)
         self.tree.column("Brand", anchor=W, width=120)
         self.tree.column("Type", anchor=W, width=120)
         self.tree.column("Name", anchor=W, width=186)
@@ -70,8 +71,8 @@ class Management:
         self.tree.column("Calo", anchor=W, width=80)
         self.tree.column("Data Source", anchor=W, width=300)
 
-        self.tree.heading("#0",text="")
-        self.tree.heading("No.", text="No.", anchor=W)
+        self.tree.heading("#0", text="")
+        self.tree.heading("No", text="No.", anchor=W)
         self.tree.heading("Brand", text="Brand", anchor=W)
         self.tree.heading("Type", text="Type", anchor=W)
         self.tree.heading("Name", text="Name", anchor=W)
@@ -94,11 +95,12 @@ class Management:
         connection.commit()
         connection.close()
 
+
     # Widgets for adding fast food information
     def add_food(self):
         self.clear_screen()
 
-        self.No = Label(self.frame_1, text="No.", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=40,y=30)
+        self.No = Label(self.frame_1, text="No", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=40,y=30)
         self.No_entry = Entry(self.frame_1, bg=self.color_4, fg=self.color_3)
         self.No_entry.place(x=50,y=65, width=200, height=30)
 
@@ -135,6 +137,7 @@ class Management:
         self.dataSource_entry.place(x=50,y=425, width=980, height=30)
 
         self.submit_bt_1 = Button(self.frame_1, text='Submit', font=(self.font_1, 15), bd=2, command=self.submit, cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=490,y=550,width=100)
+
 
     # Show a fast food information
     def get_info_view(self):
@@ -176,7 +179,7 @@ class Management:
             try:
                 connection = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database)
                 curs = connection.cursor()
-                curs.execute("select * from fast_food where Name=%s", self.getName_entry.get())
+                curs.execute("SELECT * FROM fast_food WHERE Name=%s", self.getName_entry.get())
                 row=curs.fetchone()
                 
                 if row == None:
@@ -195,7 +198,7 @@ class Management:
             try:
                 connection = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database)
                 curs = connection.cursor()
-                curs.execute("select * from fast_food where Name=%s", self.getName_entry.get())
+                curs.execute("SELECT * FROM fast_food WHERE Name=%s", self.getName_entry.get())
                 row=curs.fetchone()
                 
                 if row == None:
@@ -232,11 +235,11 @@ class Management:
 
         self.submit_bt_1 = Button(self.frame_1, text='Submit', font=(self.font_1, 15), bd=2, command=partial(self.update_info, row), cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=160,y=425,width=100)
         self.cancel_bt = Button(self.frame_1, text='Cancel', font=(self.font_1, 15), bd=2, command=self.clear_screen, cursor="hand2", bg=self.color_4,fg=self.color_3).place(x=280,y=425,width=100)
-
+    
     # Within frame 1, it displays information about fast food information
     def show_info(self, row):
         self.clear_screen()
-        No = Label(self.frame_1, text="No.", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=40,y=30)
+        No = Label(self.frame_1, text="No", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=40,y=30)
         No_data = Label(self.frame_1, text=row[0], font=(self.font_1, 15)).place(x=50, y=60)
 
         Brand = Label(self.frame_1, text="Brand", font=(self.font_2, 18, "bold"), bg=self.color_1, fg=self.color_4).place(x=40,y=100)
@@ -271,19 +274,20 @@ class Management:
             try:
                 connection = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database)
                 curs = connection.cursor()
-                curs.execute("select * from fast_food where Name=%s", row[8])
+                curs.execute("SELECT * FROM fast_food WHERE Name=%s", row[3])
                 row=curs.fetchone()
 
                 if row==None:
                     messagebox.showerror("Error!","The food doesn't exists",parent=self.window)
                 else:
-                    curs.execute("update fast_food set Carbs=%s, Protein=%s, Fat=%s, Calo=%s, Data Source=%s where Name=%s",
+                    curs.execute("UPDATE fast_food set Carbs=%s, Protein=%s, Fat=%s, Calo=%s, DataSource=%s WHERE Name=%s",
                                         (
                                             self.Carbs_entry.get(),
                                             self.Protein_entry.get(),
                                             self.Fat_entry.get(),
                                             self.Calo_entry.get(),
-                                            self.dataSource_entry.get()
+                                            self.dataSource_entry.get(),
+                                            row[3]
                                         ))
                     connection.commit()
                     connection.close()
@@ -291,11 +295,10 @@ class Management:
                     self.clear_screen()
             except Exception as e:
                 messagebox.showerror("Error!",f"Error due to {str(e)}",parent=self.window)
-    
-    
+
     # Add the information of new food information
     def submit(self):
-        if self.No_entry.get() == '' or self.Brand_entry.get() == '' or self.Type_entry.get() == '' or self.Name_entry.get() == '' or self.Carbs_entry.get() == '' or self.Protein_entry.get() == '' or self.Fat_entry.get() == '' or self.Calo_entry.get() == '' or self.dataSource_entry.get() == '':
+        if self.Name_entry.get() == '':
             messagebox.showerror("Error!","Sorry!, All fields are required",parent=self.window)
         else:
             try:
@@ -307,7 +310,7 @@ class Management:
                 if row!=None:
                     messagebox.showerror("Error!","The food name is already exists, please try again with another name",parent=self.window)
                 else:
-                    curs.execute("insert into fast_food (No.,Brand,Type,Name,Carbs,Protein,Fat,Calo,Data Source) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                    curs.execute("INSERT INTO fast_food (No, Brand, Type, Name, Carbs, Protein, Fat, Calo, DataSource) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
                                         (
                                             self.No_entry.get(),
                                             self.Brand_entry.get(),
